@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Checker</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+
+        body {
+            background-color: #dd2a2a;
+        }
+        .container {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="text-center">Grade Checker</h2>
+    <form id="gradeForm">
+        <div class="form-group">
+            <label for="subject1">Subject 1:</label>
+            <input type="number" class="form-control" id="subject1" placeholder="Enter score (0-100)" required>
+        </div>
+        <div class="form-group">
+            <label for="subject2">Subject 2:</label>
+            <input type="number" class="form-control" id="subject2" placeholder="Enter score (0-100)" required>
+        </div>
+        <div class="form-group">
+            <label for="subject3">Subject 3:</label>
+            <input type="number" class="form-control" id="subject3" placeholder="Enter score (0-100)" required>
+        </div>
+        <div class="form-group">
+            <label for="subject4">Subject 4:</label>
+            <input type="number" class="form-control" id="subject4" placeholder="Enter score (0-100)" required>
+        </div>
+        <div class="form-group">
+            <label for="subject5">Subject 5:</label>
+            <input type="number" class="form-control" id="subject5" placeholder="Enter score (0-100)" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Calculate Average</button>
+    </form>
+    <div class="mt-4" id="result"></div>
+</div>
+
+<script>
+    document.getElementById('gradeForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        // Get scores from input fields
+        const scores = [
+            parseFloat(document.getElementById('subject1').value),
+            parseFloat(document.getElementById('subject2').value),
+            parseFloat(document.getElementById('subject3').value),
+            parseFloat(document.getElementById('subject4').value),
+            parseFloat(document.getElementById('subject5').value)
+        ];
+
+        // Calculate average
+        const total = scores.reduce((acc, score) => acc + score, 0);
+        const average = total / scores.length;
+
+        // Determine grade
+        let grade;
+        if (average >= 90) {
+            grade = 'A';
+        } else if (average >= 80) {
+            grade = 'B';
+        } else if (average >= 70) {
+            grade = 'C';
+        } else if (average >= 60) {
+            grade = 'D';
+        } else {
+            grade = 'F';
+        }
+
+    
+        document.getElementById('result').innerHTML = `
+            <div class="alert alert-info">
+                Average Score: ${average.toFixed(2)}<br>
+                Grade: ${grade}
+            </div>
+        `;
+    });
+</script>
+</body>
+</html>
